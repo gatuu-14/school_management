@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2 style="color: white;">Timetable - Class {{ class_name }}</h2>
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'timetable_class' '10' %}" class="btn">Class 10</a>
+    <a href="{% url 'timetable_class' '9' %}" class="btn">Class 9</a>
+    <a href="{% url 'timetable_class' '8' %}" class="btn">Class 8</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Day</th>
+            <th>Period 1</th>
+            <th>Period 2</th>
+            <th>Period 3</th>
+            <th>Period 4</th>
+            <th>Period 5</th>
+            <th>Period 6</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for day in timetable %}
+        <tr>
+            <td><strong>{{ day.day }}</strong></td>
+            <td>{{ day.period1 }}</td>
+            <td>{{ day.period2 }}</td>
+            <td>{{ day.period3 }}</td>
+            <td>{{ day.period4 }}</td>
+            <td>{{ day.period5 }}</td>
+            <td>{{ day.period6 }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7">No timetable found for this class.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="color: white;">Student List</h2>
+    <a href="{% url 'student_create' %}" class="btn">+ Register New Student</a>
+</div>
+
+<table>
+    <thead>
+        <tr><th>Reg No</th><th>Name</th><th>Class</th><th>Section</th><th>Parent Contact</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.registration_number }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.class_name }}</td>
+            <td>{{ student.section|default:"-" }}</td>
+            <td>{{ student.parent_contact }}</td>
+            <td>
+                <a href="{% url 'student_edit' student.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'student_delete' student.id %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No students registered yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

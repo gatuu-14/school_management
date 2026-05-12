@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{{ title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn">Submit</button>
+        <a href="{% url 'teacher_list' %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="color: white;">Teacher Records</h2>
+    <a href="{% url 'teacher_create' %}" class="btn">+ Add New Teacher</a>
+</div>
+
+<table>
+    <thead>
+        <tr><th>Teacher ID</th><th>Name</th><th>Subject</th><th>Qualification</th><th>Phone</th><th>Email</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.teacher_id }}</td>
+            <td>{{ teacher.name }}</td>
+            <td>{{ teacher.subject }}</td>
+            <td>{{ teacher.qualification }}</td>
+            <td>{{ teacher.phone }}</td>
+            <td>{{ teacher.email }}</td>
+            <td>
+                <a href="{% url 'teacher_edit' teacher.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'teacher_delete' teacher.id %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7">No teachers added yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

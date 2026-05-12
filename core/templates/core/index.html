@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="stats">
+    <div class="stat-card">
+        <div class="stat-number">{{ total_students }}</div>
+        <div>Total Students</div>
+        <a href="{% url 'student_list' %}" class="btn" style="margin-top: 10px;">View All</a>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ total_teachers }}</div>
+        <div>Total Teachers</div>
+        <a href="{% url 'teacher_list' %}" class="btn" style="margin-top: 10px;">View All</a>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ total_fees }}</div>
+        <div>Fee Transactions</div>
+        <a href="{% url 'fee_list' %}" class="btn" style="margin-top: 10px;">View All</a>
+    </div>
+</div>
+
+<h2 style="color: white; margin-bottom: 15px;">Recent Fee Payments</h2>
+<table>
+    <thead>
+        <tr><th>Student</th><th>Amount</th><th>Fee Type</th><th>Date</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+        {% for fee in recent_fees %}
+        <tr>
+            <td>{{ fee.student.name }}</td>
+            <td>${{ fee.amount }}</td>
+            <td>{{ fee.fee_type }}</td>
+            <td>{{ fee.payment_date }}</td>
+            <td>{{ fee.status }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No fee records found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
